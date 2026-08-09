@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Belmont FC — Donnybrook, Dublin 4 · Est. 1990</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1C33;
+    --navy:#16305C;
+    --navy-soft:#1D3A6B;
+    --gold:#C9A227;
+    --gold-light:#E4C860;
+    --paper:#F6F3EC;
+    --paper-dim:#ECE6D6;
+    --slate:#5C7290;
+    --white:#FFFFFF;
+    --line: rgba(14,28,51,0.12);
+    --line-light: rgba(246,243,236,0.16);
+    --shadow: 0 20px 50px -20px rgba(14,28,51,0.35);
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit;}
+
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    margin:0;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+  }
+
+  .container{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  section{ position:relative; }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  }
+  .reveal.is-visible{ opacity:1; transform:translateY(0); }
+  .reveal-delay-1{ transition-delay:0.1s; }
+  .reveal-delay-2{ transition-delay:0.2s; }
+  .reveal-delay-3{ transition-delay:0.3s; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal{ opacity:1; transform:none; transition:none; }
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    text-decoration:none;
+    padding:15px 26px;
+    border-radius:2px;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:all 0.35s var(--ease);
+    font-weight:500;
+  }
+  .btn-primary{
+    background:var(--gold);
+    color:var(--ink);
+    border-color:var(--gold);
+  }
+  .btn-primary:hover{ background:var(--gold-light); border-color:var(--gold-light); transform:translateY(-2px); }
+  .btn-ghost{
+    background:transparent;
+    color:var(--paper);
+    border-color:var(--line-light);
+  }
+  .btn-ghost:hover{ border-color:var(--gold); color:var(--gold); transform:translateY(-2px); }
+  .btn-ghost-dark{
+    background:transparent;
+    color:var(--ink);
+    border-color:var(--line);
+  }
+  .btn-ghost-dark:hover{ border-color:var(--ink); background:var(--ink); color:var(--paper); }
+  .btn:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+  /* ================= HEADER ================= */
+  header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:1000;
+    padding:22px 0;
+    transition:all 0.4s var(--ease);
+    background:transparent;
+  }
+  header.scrolled{
+    padding:14px 0;
+    background:rgba(14,28,51,0.92);
+    backdrop-filter:blur(10px);
+    box-shadow:0 10px 30px -15px rgba(0,0,0,0.4);
+  }
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    max-width:1260px;
+    margin:0 auto;
+    gap:24px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+    color:var(--paper);
+  }
+  .crest{
+    width:40px; height:48px;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .crest img{ width:100%; height:100%; object-fit:contain; }
+  .brand-text{ line-height:1.1; }
+  .brand-text .name{ font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem; letter-spacing:0.02em;}
+  .brand-text .est{ font-family:'JetBrains Mono', monospace; font-size:0.62rem; letter-spacing:0.12em; color:var(--gold-light); text-transform:uppercase; }
+
+  nav.links{
+    display:flex;
+    align-items:center;
+    gap:22px;
+    flex-shrink:0;
+  }
+  nav.links a{
+    text-decoration:none;
+    color:var(--paper);
+    font-size:0.78rem;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    font-weight:500;
+    position:relative;
+    padding-bottom:4px;
+    white-space:nowrap;
+  }
+  nav.links a::after{
+    content:'';
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:1.5px;
+    background:var(--gold);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform 0.3s var(--ease);
+  }
+  nav.links a:hover::after{ transform:scaleX(1); }
+
+  .nav-dropdown{ position:relative; }
+  .nav-dropdown > a::after{ content:'⌄'; margin-left:5px; font-size:0.75em; }
+  .dropdown-panel{
+    position:absolute;
+    top:100%; left:50%;
+    transform:translate(-50%, 8px);
+    background:var(--ink);
+    border:1px solid rgba(255,255,255,0.12);
+    box-shadow:var(--shadow);
+    padding:10px;
+    min-width:190px;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity 0.25s var(--ease), transform 0.25s var(--ease), visibility 0.25s;
+    z-index:10;
+  }
+  .nav-dropdown:hover .dropdown-panel,
+  .nav-dropdown:focus-within .dropdown-panel{
+    opacity:1; visibility:visible; transform:translate(-50%, 4px);
+  }
+  .dropdown-panel a{
+    text-transform:none;
+    letter-spacing:0.01em;
+    font-size:0.86rem;
+    padding:9px 12px;
+    border-radius:2px;
+  }
+  .dropdown-panel a::after{ display:none; }
+  .dropdown-panel a:hover{ background:rgba(255,255,255,0.06); color:var(--gold-light); }
+
+  .nav-cta{ display:flex; align-items:center; gap:18px; }
+  .menu-toggle{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:8px;
+  }
+  .menu-toggle span{ width:24px; height:2px; background:var(--paper); display:block; transition:0.3s var(--ease); }
+  .menu-toggle.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .menu-toggle.open span:nth-child(2){ opacity:0; }
+  .menu-toggle.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+  /* ================= HERO ================= */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    align-items:center;
+    background:radial-gradient(120% 90% at 50% -10%, #1c3a6c 0%, #0E1C33 55%, #0a1424 100%);
+    position:relative;
+    overflow:hidden;
+    padding-top:120px;
+    padding-bottom:80px;
+  }
+  .pitch-lines{
+    position:absolute;
+    inset:0;
+    opacity:0.16;
+    pointer-events:none;
+  }
+  .hero-grain{
+    position:absolute; inset:0;
+    background-image:radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size:3px 3px;
+    pointer-events:none;
+  }
+  .hero-inner{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    max-width:900px;
+    margin:0 auto;
+  }
+  .hero-inner .eyebrow{ justify-content:center; display:flex; gap:10px; align-items:center; margin-bottom:26px;}
+  .hero-inner .eyebrow .dot{ width:5px; height:5px; background:var(--gold); border-radius:50%; }
+  .hero h1{
+    color:var(--paper);
+    font-size:clamp(3rem, 9vw, 6.4rem);
+    line-height:0.98;
+    font-weight:600;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:300;
+    color:var(--gold-light);
+  }
+  .hero p.lede{
+    color:rgba(246,243,236,0.72);
+    font-size:1.15rem;
+    line-height:1.65;
+    max-width:600px;
+    margin:28px auto 42px;
+    font-weight:400;
+  }
+  .hero-ctas{
+    display:flex;
+    gap:16px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .hero-badges{
+    display:flex;
+    justify-content:center;
+    gap:38px;
+    margin-top:76px;
+    flex-wrap:wrap;
+  }
+  .hero-badge{ text-align:center; }
+  .hero-badge .num{ font-family:'Fraunces', serif; font-size:1.9rem; color:var(--gold); font-weight:600; }
+  .hero-badge .label{ font-family:'JetBrains Mono', monospace; font-size:0.66rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(246,243,236,0.55); margin-top:4px; }
+
+  /* ================= TICKER ================= */
+  .ticker-wrap{
+    background:var(--ink);
+    border-top:1px solid rgba(255,255,255,0.08);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    overflow:hidden;
+    padding:14px 0;
+  }
+  .ticker{
+    display:flex;
+    width:max-content;
+    animation:scroll-left 32s linear infinite;
+  }
+  @keyframes scroll-left{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+  .ticker span{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+    padding:0 28px;
+    white-space:nowrap;
+    display:flex;
+    align-items:center;
+    gap:28px;
+  }
+  .ticker span::after{ content:'•'; color:var(--slate); }
+
+  /* ================= SECTION GENERIC ================= */
+  .section{ padding:120px 0; }
+  .section-tight{ padding:90px 0; }
+  .section-head{
+    max-width:640px;
+    margin-bottom:64px;
+  }
+  .section-head .eyebrow{ margin-bottom:14px; display:block; }
+  .section-head h2{
+    font-size:clamp(2.1rem, 4vw, 3.1rem);
+    line-height:1.08;
+  }
+  .section-head p{
+    color:var(--slate);
+    font-size:1.05rem;
+    line-height:1.6;
+    margin-top:18px;
+  }
+  .on-dark .section-head p{ color:rgba(246,243,236,0.65); }
+  .on-dark .section-head h2{ color:var(--paper); }
+
+  /* ---------- About ---------- */
+  .about{
+    display:grid;
+    grid-template-columns:0.95fr 1.05fr;
+    gap:72px;
+    align-items:center;
+  }
+  .about-media{
+    position:relative;
+    border-radius:2px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    aspect-ratio:4/5;
+  }
+  .about-media img{ width:100%; height:100%; object-fit:cover; }
+  .about-media::after{
+    content:'';
+    position:absolute; inset:0;
+    border:1px solid rgba(255,255,255,0.25);
+    box-shadow:inset 0 0 0 10px var(--paper);
+    pointer-events:none;
+  }
+  .about-text p{
+    color:var(--ink);
+    opacity:0.82;
+    line-height:1.75;
+    font-size:1.02rem;
+    margin:0 0 20px;
+  }
+  .about-text .quote{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:1.5rem;
+    line-height:1.35;
+    color:var(--navy);
+    margin-bottom:26px;
+    border-left:3px solid var(--gold);
+    padding-left:22px;
+  }
+
+  /* ---------- Values ---------- */
+  .values-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .value-card{
+    background:var(--paper);
+    padding:44px 32px;
+    transition:background 0.35s var(--ease);
+  }
+  .value-card:hover{ background:var(--white); }
+  .value-card .index{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--gold);
+    font-size:0.78rem;
+    letter-spacing:0.1em;
+  }
+  .value-card h3{
+    font-size:1.3rem;
+    margin:18px 0 12px;
+    color:var(--ink);
+  }
+  .value-card p{
+    color:var(--slate);
+    font-size:0.94rem;
+    line-height:1.6;
+    margin:0;
+  }
+
+  /* ---------- Youth Development (dark) ---------- */
+  .youth{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .youth-grid{
+    display:grid;
+    grid-template-columns:0.8fr 1.2fr;
+    gap:80px;
+    align-items:start;
+  }
+  .youth-stat{
+    font-family:'Fraunces', serif;
+    font-size:clamp(5rem, 11vw, 8.5rem);
+    font-weight:600;
+    color:var(--gold);
+    line-height:0.85;
+  }
+  .youth-stat-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:rgba(246,243,236,0.55);
+    margin-top:16px;
+  }
+  .youth-text p{ color:rgba(246,243,236,0.75); line-height:1.75; font-size:1.02rem; margin-bottom:24px; }
+  .youth-list{ list-style:none; padding:0; margin:32px 0 0; display:grid; gap:16px; }
+  .youth-list li{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    font-size:0.98rem;
+    color:var(--paper);
+    padding-top:16px;
+    border-top:1px solid rgba(255,255,255,0.12);
+  }
+  .youth-list li .tick{ color:var(--gold); font-family:'JetBrains Mono', monospace; flex-shrink:0; }
+
+  /* ---------- Community ---------- */
+  .community{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:72px;
+    align-items:center;
+  }
+  .community-media{
+    position:relative;
+    border-radius:2px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    aspect-ratio:5/4;
+  }
+  .community-media img{ width:100%; height:100%; object-fit:cover; }
+  .community-list{ display:grid; gap:28px; margin-top:36px; }
+  .community-item{ display:flex; gap:20px; }
+  .community-item .mark{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    color:var(--gold);
+    font-size:1.4rem;
+    flex-shrink:0;
+    width:34px;
+  }
+  .community-item h4{ font-size:1.08rem; margin-bottom:6px; }
+  .community-item p{ color:var(--slate); font-size:0.95rem; line-height:1.6; margin:0; }
+
+  /* ---------- Pitches ---------- */
+  .pitches{
+    background:var(--paper-dim);
+  }
+  .pitch-card{
+    background:var(--navy);
+    border-radius:2px;
+    padding:56px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    color:var(--paper);
+    box-shadow:var(--shadow);
+  }
+  .pitch-info h3{ color:var(--paper); font-size:1.8rem; margin-bottom:18px; }
+  .pitch-info p{ color:rgba(246,243,236,0.72); line-height:1.7; margin-bottom:0; }
+  .pitch-meta{ display:grid; grid-template-columns:1fr 1fr; gap:24px 32px; align-content:start; }
+  .pitch-meta div{ border-top:1px solid rgba(255,255,255,0.15); padding-top:14px; }
+  .pitch-meta .m-label{ font-family:'JetBrains Mono', monospace; font-size:0.66rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold-light); margin-bottom:8px; }
+  .pitch-meta .m-value{ font-size:1rem; color:var(--paper); }
+
+  /* ---------- News ---------- */
+  .news-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:28px;
+  }
+  .news-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:2px;
+    overflow:hidden;
+    transition:transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  }
+  .news-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow); }
+  .news-media{ aspect-ratio:16/10; overflow:hidden; }
+  .news-media img{ width:100%; height:100%; object-fit:cover; transition:transform 0.6s var(--ease); }
+  .news-card:hover .news-media img{ transform:scale(1.06); }
+  .news-body{ padding:26px 26px 30px; }
+  .news-date{ font-family:'JetBrains Mono', monospace; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); }
+  .news-card h3{ font-size:1.18rem; margin:12px 0 10px; line-height:1.3; }
+  .news-card p{ color:var(--slate); font-size:0.92rem; line-height:1.55; margin:0; }
+  .news-foot{ text-align:center; margin-top:52px; }
+
+  /* ---------- Gallery ---------- */
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    grid-auto-rows:180px;
+    gap:14px;
+  }
+  .gallery-item{
+    border-radius:2px;
+    overflow:hidden;
+    position:relative;
+  }
+  .gallery-item.span-2{ grid-column:span 2; grid-row:span 2; }
+  .gallery-item img{
+    width:100%; height:100%; object-fit:cover;
+    transition:transform 0.6s var(--ease), filter 0.4s var(--ease);
+  }
+  .gallery-item:hover img{ transform:scale(1.08); filter:brightness(0.9); }
+
+  /* ---------- Club Info cards ---------- */
+  .info-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:1px;
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.12);
+  }
+  .info-card{
+    background:var(--navy);
+    padding:40px 30px;
+    color:var(--paper);
+    transition:background 0.3s var(--ease);
+  }
+  .info-card:hover{ background:var(--navy-soft); }
+  .info-card .index{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--gold);
+    font-size:0.78rem;
+    letter-spacing:0.1em;
+  }
+  .info-card h3{ color:var(--paper); font-size:1.25rem; margin:16px 0 10px; }
+  .info-card p{ color:rgba(246,243,236,0.68); font-size:0.92rem; line-height:1.6; margin:0 0 18px; }
+  .info-link{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--gold-light);
+    border-bottom:1px solid transparent;
+    transition:border-color 0.3s var(--ease);
+  }
+  .info-link:hover{ border-color:var(--gold-light); }
+
+  /* ---------- Shop ---------- */
+  .shop-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:28px;
+  }
+  .shop-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:2px;
+    overflow:hidden;
+    transition:transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  }
+  .shop-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow); }
+  .shop-media{ aspect-ratio:1/1; overflow:hidden; background:var(--paper-dim); }
+  .shop-media img{ width:100%; height:100%; object-fit:cover; transition:transform 0.6s var(--ease); }
+  .shop-card:hover .shop-media img{ transform:scale(1.06); }
+  .shop-body{ padding:22px 24px 26px; display:flex; justify-content:space-between; align-items:center; }
+  .shop-body h3{ font-size:1.05rem; }
+  .shop-price{ font-family:'JetBrains Mono', monospace; color:var(--gold); font-size:0.92rem; margin:0; }
+
+  /* ---------- Membership CTA ---------- */
+  .membership{
+    background:linear-gradient(120deg, #16305C 0%, #0E1C33 100%);
+    color:var(--paper);
+    text-align:center;
+    padding:110px 0;
+  }
+  .membership h2{
+    color:var(--paper);
+    font-size:clamp(2.2rem, 5vw, 3.6rem);
+    max-width:760px;
+    margin:0 auto 22px;
+    line-height:1.1;
+  }
+  .membership p{
+    color:rgba(246,243,236,0.7);
+    max-width:560px;
+    margin:0 auto 40px;
+    font-size:1.05rem;
+    line-height:1.65;
+  }
+  .age-chips{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:44px;
+  }
+  .age-chips span{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.06em;
+    border:1px solid var(--line-light);
+    border-radius:20px;
+    padding:9px 18px;
+    color:var(--gold-light);
+  }
+
+  /* ---------- Sponsors ---------- */
+  .sponsors-strip{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:24px;
+    padding-top:16px;
+  }
+  .sponsor-slot{
+    flex:1;
+    min-width:140px;
+    height:74px;
+    border:1px dashed var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--slate);
+    border-radius:2px;
+    transition:border-color 0.3s var(--ease), color 0.3s var(--ease);
+  }
+  .sponsor-slot:hover{ border-color:var(--gold); color:var(--gold); }
+
+  /* ================= CONTACT / FOOTER ================= */
+  footer{
+    background:var(--ink);
+    color:var(--paper);
+    padding-top:100px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.3fr 0.8fr 0.8fr 1fr;
+    gap:48px;
+    padding-bottom:70px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+  .footer-brand .brand{ margin-bottom:18px; }
+  .footer-brand p{ color:rgba(246,243,236,0.6); line-height:1.7; font-size:0.94rem; max-width:320px; }
+  .footer-social{ display:flex; gap:14px; margin-top:22px; }
+  .footer-social a{
+    width:38px; height:38px;
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    text-decoration:none;
+    transition:all 0.3s var(--ease);
+  }
+  .footer-social a:hover{ border-color:var(--gold); background:rgba(201,162,39,0.1); }
+  .footer-social svg{ width:16px; height:16px; fill:var(--paper); }
+
+  .footer-col h5{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:20px;
+  }
+  .footer-col ul{ list-style:none; padding:0; margin:0; display:grid; gap:12px; }
+  .footer-col a{ text-decoration:none; color:rgba(246,243,236,0.7); font-size:0.92rem; transition:color 0.25s var(--ease); }
+  .footer-col a:hover{ color:var(--gold-light); }
+
+  .footer-form p{ color:rgba(246,243,236,0.6); font-size:0.9rem; line-height:1.6; margin:0 0 18px; }
+  .footer-form form{ display:flex; gap:8px; }
+  .footer-form input[type="email"]{
+    flex:1;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.18);
+    color:var(--paper);
+    padding:13px 14px;
+    font-family:'Inter', sans-serif;
+    font-size:0.88rem;
+    border-radius:2px;
+  }
+  .footer-form input[type="email"]::placeholder{ color:rgba(246,243,236,0.4); }
+  .footer-form input:focus{ outline:none; border-color:var(--gold); }
+  .footer-form button{
+    background:var(--gold);
+    border:1px solid var(--gold);
+    color:var(--ink);
+    padding:0 20px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    cursor:pointer;
+    border-radius:2px;
+    transition:background 0.3s var(--ease);
+  }
+  .footer-form button:hover{ background:var(--gold-light); }
+  .form-note{ font-size:0.78rem; color:var(--gold-light); margin-top:10px; min-height:16px; }
+
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:26px 0;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .footer-bottom p{ margin:0; color:rgba(246,243,236,0.45); font-size:0.82rem; }
+  .footer-bottom .legal{ display:flex; gap:22px; }
+  .footer-bottom a{ color:rgba(246,243,236,0.45); text-decoration:none; font-size:0.82rem; }
+  .footer-bottom a:hover{ color:var(--gold-light); }
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 1060px){
+    nav.links{ display:none; }
+    .menu-toggle{ display:flex; }
+    .about, .community{ grid-template-columns:1fr; gap:44px; }
+    .about-media, .community-media{ order:-1; max-width:420px; }
+    .youth-grid{ grid-template-columns:1fr; gap:40px; }
+    .values-grid{ grid-template-columns:repeat(2, 1fr); }
+    .news-grid{ grid-template-columns:1fr; }
+    .pitch-card{ grid-template-columns:1fr; padding:36px; }
+    .footer-grid{ grid-template-columns:1fr 1fr; }
+    .gallery-grid{ grid-template-columns:repeat(2, 1fr); grid-auto-rows:160px; }
+    .gallery-item.span-2{ grid-column:span 2; grid-row:span 1; }
+    .info-grid{ grid-template-columns:1fr 1fr; }
+    .shop-grid{ grid-template-columns:repeat(2, 1fr); }
+  }
+  @media (max-width: 620px){
+    .container{ padding:0 22px; }
+    .section{ padding:80px 0; }
+    .values-grid{ grid-template-columns:1fr; }
+    .hero-badges{ gap:26px; }
+    .footer-grid{ grid-template-columns:1fr; gap:40px; }
+    .pitch-meta{ grid-template-columns:1fr 1fr; }
+    .sponsors-strip{ gap:14px; }
+    .sponsor-slot{ min-width:100px; height:60px; }
+    .gallery-grid{ grid-template-columns:1fr 1fr; grid-auto-rows:130px; }
+    .info-grid{ grid-template-columns:1fr; }
+    .shop-grid{ grid-template-columns:1fr; }
+  }
+
+  /* Mobile nav panel */
+  .mobile-nav{
+    position:fixed;
+    inset:0;
+    background:var(--ink);
+    z-index:999;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:30px;
+    transform:translateY(-100%);
+    transition:transform 0.5s var(--ease);
+  }
+  .mobile-nav.open{ transform:translateY(0); }
+  .mobile-nav a{
+    font-family:'Fraunces', serif;
+    font-size:1.8rem;
+    color:var(--paper);
+    text-decoration:none;
+  }
+  .mobile-nav a:hover{ color:var(--gold); }
+
+  :focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header id="siteHeader">
+  <div class="container nav-inner">
+    <a href="#top" class="brand">
+      <span class="crest"><img src="https://static.wixstatic.com/media/83a797_43cd6cb9d01148349759b3ebde5efbbc~mv2.png" alt="Belmont FC crest"></span>
+      <span class="brand-text">
+        <span class="name">Belmont FC</span><br>
+        <span class="est">Est. 1990 · Donnybrook</span>
+      </span>
+    </a>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#values">Values</a>
+      <div class="nav-dropdown">
+        <a href="#news">News &amp; Gallery</a>
+        <div class="dropdown-panel">
+          <a href="#news">Latest News</a>
+          <a href="#gallery">Gallery</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="#club-info">Club Info</a>
+        <div class="dropdown-panel">
+          <a href="#club-info-membership">Membership</a>
+          <a href="#club-info-governance">Governance</a>
+          <a href="#club-info-volunteering">Volunteering</a>
+          <a href="#club-info-contacts">Club Contacts</a>
+        </div>
+      </div>
+      <a href="#pitches">Pitches</a>
+      <a href="#shop">Shop</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#membership" class="btn btn-ghost" style="display:none;" id="desktopJoin">Join Us</a>
+      <a href="#membership" class="btn btn-primary">Join Us</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#top">Home</a>
+  <a href="#about">About</a>
+  <a href="#values">Values</a>
+  <a href="#youth">Youth</a>
+  <a href="#news">News</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#club-info">Club Info</a>
+  <a href="#pitches">Pitches</a>
+  <a href="#shop">Shop</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<div id="top"></div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <svg class="pitch-lines" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+    <line x1="600" y1="0" x2="600" y2="800" stroke="#E4C860" stroke-width="1.5"/>
+    <circle cx="600" cy="400" r="140" stroke="#E4C860" stroke-width="1.5" fill="none"/>
+    <circle cx="600" cy="400" r="3" fill="#E4C860"/>
+    <rect x="0" y="220" width="140" height="360" stroke="#E4C860" stroke-width="1.5" fill="none"/>
+    <rect x="1060" y="220" width="140" height="360" stroke="#E4C860" stroke-width="1.5" fill="none"/>
+  </svg>
+  <div class="hero-grain"></div>
+
+  <div class="container hero-inner">
+    <span class="eyebrow"><span class="dot"></span> DDSL &amp; FAI Affiliated · Herbert Park, Dublin 4</span>
+    <h1 class="reveal is-visible">Belmont <em>FC</em></h1>
+    <p class="lede reveal is-visible reveal-delay-1">A community football club built on the grass pitches of Herbert Park since 1990 — where young players grow, in yellow and blue, on and off the ball.</p>
+    <div class="hero-ctas reveal is-visible reveal-delay-2">
+      <a href="#membership" class="btn btn-primary">Join The Club</a>
+      <a href="#about" class="btn btn-ghost">Our Story</a>
+    </div>
+
+    <div class="hero-badges reveal is-visible reveal-delay-3">
+      <div class="hero-badge"><div class="num">1990</div><div class="label">Founded</div></div>
+      <div class="hero-badge"><div class="num">4+</div><div class="label">Starting Age</div></div>
+      <div class="hero-badge"><div class="num">100%</div><div class="label">Volunteer Run</div></div>
+      <div class="hero-badge"><div class="num">D4</div><div class="label">Donnybrook, Dublin</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TICKER ============ -->
+<div class="ticker-wrap">
+  <div class="ticker" id="ticker">
+    <span>Founded 1990</span><span>Donnybrook, Dublin 4</span><span>Herbert Park Grass Pitches</span><span>DDSL Affiliated</span><span>Yellow &amp; Blue</span><span>Volunteer Run</span>
+    <span>Founded 1990</span><span>Donnybrook, Dublin 4</span><span>Herbert Park Grass Pitches</span><span>DDSL Affiliated</span><span>Yellow &amp; Blue</span><span>Volunteer Run</span>
+  </div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about">
+  <div class="container about">
+    <div class="about-media reveal">
+      <img src="https://static.wixstatic.com/media/83a797_0a238d8f450d43ef8d58d1a5332da7d7~mv2.jpg" alt="Belmont FC players on the pitch at Herbert Park">
+    </div>
+    <div class="about-text reveal reveal-delay-1">
+      <span class="eyebrow">About the club</span>
+      <h2 style="font-size:2.4rem; margin:14px 0 26px;">Rooted in Donnybrook since 1990</h2>
+      <p class="quote">"Passionate, committed, and driven — a club shaped by the people who show up for it."</p>
+      <p>Belmont FC began over three decades ago as a handful of local enthusiasts with a ball and a patch of grass. Today, we're a full community club competing in the Dublin District Schoolboy League, affiliated with the FAI, playing home matches on the grass pitches of Herbert Park.</p>
+      <p>Every jersey, training cone, and coaching hour is funded by the club itself and run entirely by volunteers — parents, past players, and neighbours who believe Donnybrook should always have a club to call its own.</p>
+      <a href="#youth" class="btn btn-ghost-dark">Read About Our Programmes</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VALUES ============ -->
+<section class="section section-tight" id="values" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Club values</span>
+      <h2>What we play for</h2>
+      <p>Four principles guide everything from our under-7s training sessions to matchday on a Saturday morning.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="values-grid reveal">
+      <div class="value-card">
+        <span class="index">01</span>
+        <h3>Community</h3>
+        <p>A club open to the neighbourhood — where football brings families and generations together.</p>
+      </div>
+      <div class="value-card">
+        <span class="index">02</span>
+        <h3>Development</h3>
+        <p>Skills built with patience, from a first touch at age four to composure under pressure at sixteen.</p>
+      </div>
+      <div class="value-card">
+        <span class="index">03</span>
+        <h3>Respect</h3>
+        <p>For teammates, opponents, referees, and the game itself — on the pitch and on the sideline.</p>
+      </div>
+      <div class="value-card">
+        <span class="index">04</span>
+        <h3>Belonging</h3>
+        <p>Every player, regardless of ability or background, has a place in a Belmont shirt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ YOUTH DEVELOPMENT ============ -->
+<section class="section youth" id="youth">
+  <div class="container youth-grid">
+    <div class="reveal">
+      <div class="youth-stat">4+</div>
+      <div class="youth-stat-label">Age players first pull on a jersey</div>
+    </div>
+    <div class="youth-text reveal reveal-delay-1">
+      <span class="eyebrow">Youth development</span>
+      <h2 style="color:var(--paper); font-size:2.3rem; margin:14px 0 22px;">Character before the scoreline</h2>
+      <p>Youth development sits at the heart of Belmont FC. We train players at every level from age four upward, with a curriculum focused as much on discipline and teamwork as it is on technique.</p>
+      <p>It's this long view — patient coaching over quick wins — that's turned the club into a fixture of the local community and a launchpad for a new generation of players.</p>
+      <ul class="youth-list">
+        <li><span class="tick">01</span> Age-graded training pathways from U7 through U16</li>
+        <li><span class="tick">02</span> FAI-aligned coaching standards across every squad</li>
+        <li><span class="tick">03</span> Emphasis on sportsmanship, discipline and teamwork</li>
+        <li><span class="tick">04</span> Volunteer coaches drawn from the Belmont community</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMMUNITY ============ -->
+<section class="section" id="community">
+  <div class="container community">
+    <div class="reveal">
+      <span class="eyebrow">Community engagement</span>
+      <h2 style="font-size:2.3rem; margin:14px 0 8px;">More than a football club</h2>
+      <div class="community-list">
+        <div class="community-item">
+          <span class="mark">”</span>
+          <div>
+            <h4>Family &amp; club days</h4>
+            <p>Seasonal BBQs and family days that turn Herbert Park into a gathering point for the whole community.</p>
+          </div>
+        </div>
+        <div class="community-item">
+          <span class="mark">”</span>
+          <div>
+            <h4>Charity matches</h4>
+            <p>Fixtures organised in support of local causes, bringing former players back onto the pitch.</p>
+          </div>
+        </div>
+        <div class="community-item">
+          <span class="mark">”</span>
+          <div>
+            <h4>Outreach programmes</h4>
+            <p>Access initiatives that open the game to children who might not otherwise get to play.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="community-media reveal reveal-delay-1">
+      <img src="https://static.wixstatic.com/media/83a797_b33368fe4b494cd1882a069b01a6c5da~mv2.jpg" alt="Belmont FC community event">
+    </div>
+  </div>
+</section>
+
+<!-- ============ PITCHES ============ -->
+<section class="section pitches" id="pitches">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Home ground</span>
+      <h2>Herbert Park, Donnybrook</h2>
+    </div>
+    <div class="pitch-card reveal">
+      <div class="pitch-info">
+        <h3>Grass pitches, open skies</h3>
+        <p>Our home fixtures are played on the grass pitches of Herbert Park in Donnybrook, Dublin 4 — a home ground the club has known since its earliest seasons in the DDSL.</p>
+      </div>
+      <div class="pitch-meta">
+        <div><div class="m-label">Location</div><div class="m-value">Herbert Park, Donnybrook, D4</div></div>
+        <div><div class="m-label">Surface</div><div class="m-value">Natural grass</div></div>
+        <div><div class="m-label">League</div><div class="m-value">DDSL / FAI affiliated</div></div>
+        <div><div class="m-label">Club colours</div><div class="m-value">Yellow &amp; Blue</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEWS ============ -->
+<section class="section" id="news">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">News &amp; gallery</span>
+      <h2>From the touchline</h2>
+      <p>A running record of results, club news and matchday photos — sample layout, ready to connect to your club's news feed.</p>
+    </div>
+    <div class="news-grid">
+      <article class="news-card reveal">
+        <div class="news-media"><img src="https://static.wixstatic.com/media/722185_1dd131ac5d9b408b9fc2fe3d3903a132~mv2.png" alt="U16 squad photo"></div>
+        <div class="news-body">
+          <span class="news-date">Matchday</span>
+          <h3>U16s open the season with a home win</h3>
+          <p>A composed second-half performance at Herbert Park sets the tone for the campaign ahead.</p>
+        </div>
+      </article>
+      <article class="news-card reveal reveal-delay-1">
+        <div class="news-media"><img src="https://static.wixstatic.com/media/722185_b0e1622297064220b515d3d1694696d8~mv2.jpg" alt="Belmont FC training session"></div>
+        <div class="news-body">
+          <span class="news-date">Club news</span>
+          <h3>Pre-season training returns to Herbert Park</h3>
+          <p>All age groups are back in training ahead of the new DDSL season — new members welcome.</p>
+        </div>
+      </article>
+      <article class="news-card reveal reveal-delay-2">
+        <div class="news-media"><img src="https://static.wixstatic.com/media/83a797_4880796a76c948ab91fdc097f7daa771~mv2.jpg" alt="Belmont FC club event"></div>
+        <div class="news-body">
+          <span class="news-date">Community</span>
+          <h3>Club day brings Donnybrook together</h3>
+          <p>Families, alumni and current players gathered for an afternoon of football and food.</p>
+        </div>
+      </article>
+    </div>
+    <div class="news-foot reveal">
+      <a href="#" class="btn btn-ghost-dark">View All News</a>
+    </div>
+  </div>
+
+  <div class="container" id="gallery" style="margin-top:120px;">
+    <div class="section-head reveal">
+      <span class="eyebrow">Gallery</span>
+      <h2>Matchday moments</h2>
+      <p>Snapshots from training, matchdays and club events at Herbert Park. The full gallery filters by team and season.</p>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item span-2"><img src="https://static.wixstatic.com/media/83a797_0a238d8f450d43ef8d58d1a5332da7d7~mv2.jpg" alt="Belmont FC match action at Herbert Park"></div>
+      <div class="gallery-item"><img src="https://static.wixstatic.com/media/722185_1dd131ac5d9b408b9fc2fe3d3903a132~mv2.png" alt="U16 squad photo"></div>
+      <div class="gallery-item"><img src="https://static.wixstatic.com/media/83a797_b33368fe4b494cd1882a069b01a6c5da~mv2.jpg" alt="Belmont FC community event"></div>
+      <div class="gallery-item"><img src="https://static.wixstatic.com/media/722185_b0e1622297064220b515d3d1694696d8~mv2.jpg" alt="Belmont FC training session"></div>
+      <div class="gallery-item span-2"><img src="https://static.wixstatic.com/media/83a797_4880796a76c948ab91fdc097f7daa771~mv2.jpg" alt="Belmont FC club day"></div>
+    </div>
+    <div class="news-foot reveal">
+      <a href="#" class="btn btn-ghost-dark">View Full Gallery</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLUB INFO ============ -->
+<section class="section pitches" id="club-info">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Club information</span>
+      <h2>Everything you need to know</h2>
+      <p>How the club is run, how to get involved, and who to talk to.</p>
+    </div>
+    <div class="info-grid">
+      <div class="info-card reveal" id="club-info-membership">
+        <span class="index">01</span>
+        <h3>Membership</h3>
+        <p>Age-group registration, fees and what's included in your subscription for the season.</p>
+        <a href="#membership" class="info-link">View membership details →</a>
+      </div>
+      <div class="info-card reveal reveal-delay-1" id="club-info-governance">
+        <span class="index">02</span>
+        <h3>Governance</h3>
+        <p>Our committee structure, club constitution, and child welfare and safeguarding policies.</p>
+        <a href="#" class="info-link">View governance documents →</a>
+      </div>
+      <div class="info-card reveal reveal-delay-2" id="club-info-volunteering">
+        <span class="index">03</span>
+        <h3>Volunteering</h3>
+        <p>Belmont FC runs entirely on volunteers — coaches, team managers, and matchday helpers.</p>
+        <a href="#" class="info-link">Get involved →</a>
+      </div>
+      <div class="info-card reveal reveal-delay-3" id="club-info-contacts">
+        <span class="index">04</span>
+        <h3>Club Contacts</h3>
+        <p>Reach team managers, the committee, or the club secretary directly.</p>
+        <a href="#contact" class="info-link">Contact the club →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEMBERSHIP CTA ============ -->
+<section class="membership" id="membership">
+  <div class="container">
+    <span class="eyebrow" style="display:block; margin-bottom:18px;">Membership</span>
+    <h2 class="reveal is-visible">Become part of Belmont FC</h2>
+    <p class="reveal is-visible reveal-delay-1">Registration is open for the coming season across all age groups. New players and volunteers are always welcome.</p>
+    <div class="age-chips reveal is-visible reveal-delay-2">
+      <span>U7</span><span>U8</span><span>U9</span><span>U10</span><span>U11</span><span>U12</span><span>U13</span><span>U14</span><span>U15</span><span>U16</span>
+    </div>
+    <div class="hero-ctas reveal is-visible reveal-delay-3">
+      <a href="#contact" class="btn btn-primary">Start Registration</a>
+      <a href="#contact" class="btn btn-ghost">Volunteer With Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPONSORS ============ -->
+<section class="section-tight">
+  <div class="container">
+    <div class="section-head reveal" style="margin-bottom:36px;">
+      <span class="eyebrow">Club sponsors</span>
+      <h2 style="font-size:1.9rem;">With thanks to those who back us</h2>
+    </div>
+    <div class="sponsors-strip reveal">
+      <div class="sponsor-slot">Sponsor One</div>
+      <div class="sponsor-slot">Sponsor Two</div>
+      <div class="sponsor-slot">Sponsor Three</div>
+      <div class="sponsor-slot">Sponsor Four</div>
+      <div class="sponsor-slot">Become a Sponsor</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHOP ============ -->
+<section class="section" id="shop">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Club shop</span>
+      <h2>Wear the yellow and blue</h2>
+      <p>Official jerseys, training kit and club merchandise — sample layout for the online shop.</p>
+    </div>
+    <div class="shop-grid">
+      <div class="shop-card reveal">
+        <div class="shop-media"><img src="https://static.wixstatic.com/media/722185_1dd131ac5d9b408b9fc2fe3d3903a132~mv2.png" alt="Belmont FC home jersey"></div>
+        <div class="shop-body">
+          <h3>Home Jersey</h3>
+          <p class="shop-price">€45.00</p>
+        </div>
+      </div>
+      <div class="shop-card reveal reveal-delay-1">
+        <div class="shop-media"><img src="https://static.wixstatic.com/media/722185_b0e1622297064220b515d3d1694696d8~mv2.jpg" alt="Belmont FC training kit"></div>
+        <div class="shop-body">
+          <h3>Training Kit</h3>
+          <p class="shop-price">€38.00</p>
+        </div>
+      </div>
+      <div class="shop-card reveal reveal-delay-2">
+        <div class="shop-media"><img src="https://static.wixstatic.com/media/83a797_4880796a76c948ab91fdc097f7daa771~mv2.jpg" alt="Belmont FC club hoodie"></div>
+        <div class="shop-body">
+          <h3>Club Hoodie</h3>
+          <p class="shop-price">€52.00</p>
+        </div>
+      </div>
+    </div>
+    <div class="news-foot reveal">
+      <a href="#" class="btn btn-primary">Shop Online</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER / CONTACT ============ -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="brand">
+          <span class="crest"><img src="https://static.wixstatic.com/media/83a797_43cd6cb9d01148349759b3ebde5efbbc~mv2.png" alt="Belmont FC crest"></span>
+          <span class="brand-text">
+            <span class="name">Belmont FC</span><br>
+            <span class="est">Est. 1990 · Donnybrook</span>
+          </span>
+        </a>
+        <p>A community football club playing on the grass pitches of Herbert Park, Donnybrook, Dublin 4. Proudly yellow and blue since 1990.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/wearebelmontfc/" aria-label="Belmont FC on Facebook" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.5l.5-3h-3V8.3c0-.87.24-1.46 1.5-1.46h1.6V4.14C15.85 4.06 15 4 14 4c-2.1 0-3.5 1.28-3.5 3.63V10.5H8v3h2.5V21h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/wearebelmontfc" aria-label="Belmont FC on Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 4.6c2.4 0 2.7 0 3.6.05 2.4.11 3.6 1.35 3.7 3.7.05.9.06 1.15.06 3.65s0 2.75-.06 3.65c-.1 2.34-1.3 3.6-3.7 3.7-.9.05-1.16.06-3.6.06s-2.75 0-3.65-.06c-2.4-.1-3.6-1.36-3.7-3.7C4.55 14.75 4.54 14.5 4.54 12s0-2.75.06-3.65c.1-2.35 1.3-3.6 3.7-3.7.9-.05 1.15-.05 3.65-.05zM12 3c-2.44 0-2.75 0-3.7.06-3.16.14-4.9 1.87-5.04 5.04C3.2 9.05 3.2 9.36 3.2 12s0 2.94.06 3.9c.14 3.16 1.87 4.9 5.04 5.04.95.05 1.26.06 3.7.06s2.75 0 3.7-.06c3.16-.14 4.9-1.87 5.04-5.04.05-.95.06-1.25.06-3.9s0-2.75-.06-3.7c-.14-3.16-1.87-4.9-5.04-5.04C14.75 3 14.44 3 12 3zm0 4.7A4.3 4.3 0 1 0 12 16.3 4.3 4.3 0 0 0 12 7.7zm0 7.1a2.8 2.8 0 1 1 0-5.6 2.8 2.8 0 0 1 0 5.6zm4.46-7.27a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#values">Club Values</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#pitches">Pitches</a></li>
+          <li><a href="#shop">Shop</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Club Info</h5>
+        <ul>
+          <li><a href="#club-info-membership">Membership</a></li>
+          <li><a href="#club-info-governance">Governance</a></li>
+          <li><a href="#club-info-volunteering">Volunteering</a></li>
+          <li><a href="#club-info-contacts">Club Contacts</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-form">
+        <h5>Club Newsletter</h5>
+        <p>Season updates, fixtures and club news — straight to your inbox.</p>
+        <form id="newsletterForm">
+          <input type="email" placeholder="you@email.com" required aria-label="Email address">
+          <button type="submit">Sign Up</button>
+        </form>
+        <div class="form-note" id="formNote"></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Belmont FC. Founded 1990. Donnybrook, Dublin 4.</p>
+      <div class="legal">
+        <a href="#">Privacy</a>
+        <a href="#">Governance</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Header scroll state
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile nav
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  menuToggle.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    menuToggle.classList.toggle('open', isOpen);
+    menuToggle.setAttribute('aria-expanded', isOpen);
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      menuToggle.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', false);
+    });
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal:not(.is-visible)');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Newsletter form (demo only)
+  const form = document.getElementById('newsletterForm');
+  const note = document.getElementById('formNote');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    note.textContent = 'Thanks — you\'re on the list for club updates.';
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
